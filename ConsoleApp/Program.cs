@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Library;
 
 namespace ConsoleApp
 {
@@ -6,7 +6,11 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var manage = new ManageUI();
+
+            manage.Introduce();
+            manage.LoginToSystem();
+            manage.MainLoop();
         }
     }
 }
