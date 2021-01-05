@@ -4,25 +4,19 @@ namespace Library
 {
     public class Logging : Manage
     {
-        public Person User { get; set; }
-
-        public void GetPerson(string login, string password)
+        /// <summary>
+        /// sprawdza czy istnieje uzytkownik z podanym loginem i haslem,
+        /// klasa dziedziczy z Manage aby mogla otrzymac People List<Person>
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <returns>pierwsza osobe ktora ma taki login i haslo, lub null</returns>
+        public Person GetPerson(string login, string password)
         {
-            var CurrentUser = People
-                .Where(x => x.Login == login && x.Password == password)
-                .Select(x => new Person
-                {
-                    Imie = x.Imie,
-                    Nazwisko = x.Nazwisko,
-                    Profession = x.Profession,
-                    Login = x.Login,
-                    Password = x.Password
-                });
+            var User = People
+                .Where(x => x.Login == login && x.Haslo == password).FirstOrDefault();
 
-            if (CurrentUser != null)
-                this.User = (Person)CurrentUser;
-
-            throw new GetPersonIsWrong();
+            return User;
         }
 
     }

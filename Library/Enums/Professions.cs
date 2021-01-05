@@ -3,8 +3,8 @@
     public enum Professions
     {
         Unknown,
-        Pielegniarki,
-        Lekarze,
-        Administratorzy
+        Nurse,
+        Doctor,
+        Administrator
     }
 }

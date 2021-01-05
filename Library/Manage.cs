@@ -1,30 +1,40 @@
-﻿using Newtonsoft.Json;
+﻿using Library.Database;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Library
 {
     public class Manage
     {
-        public static List<Person> People { get; set; }
-        public string FileListName { get; set; } = "ListInJsonFile.txt";
-        public bool isExistFileList { get; set; }
+        public List<Person> People { get; set; }
+        public Person CurrentUser { get; set; }
 
         public Manage()
         {
-            this.GetFileList();
+            var db = new JsonDatabase();
+            this.People = db.GetData();
         }
 
-        public void GetFileList()
+
+        /// <summary>
+        /// posrednik pomiedzy algorytmem do logowania
+        /// </summary>
+        /// <param name="setCuser">jesli setCuser jest na true to znaczy ze prawidlowo 
+        /// pobrany user zostanie przypisany do obiektu</param>
+        /// <returns>zwraca prawde lub falsz do wiadomosci czy udalo sie zalogowac</returns>
+        public bool TryLogging(string login, string pass, bool setCuser=false)
         {
-            isExistFileList = File.Exists(FileListName);
+            var logging = new Logging();
+            var isSuccessed = logging.GetPerson(login, pass);
 
-            if (!isExistFileList)
-                throw new FileDoesntExist();
+            if (setCuser)
+                CurrentUser = isSuccessed;
 
-            var file = File.ReadAllText(FileListName);
+            return isSuccessed != null;
+        }
 
-            People = JsonConvert.DeserializeObject<List<Person>>(file);
+        public string GetName()
+        {
+            return CurrentUser.Imie.ToString();
         }
     }
 }

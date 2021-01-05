@@ -3,8 +3,10 @@ using System;
 
 namespace ConsoleApp
 {
-    internal class ManageUI
+    public class ManageUI
     {
+        public Manage Manage1 { get; set; } = new Manage();
+
         public void Introduce()
         {
             Console.WriteLine("=============================");
@@ -14,12 +16,16 @@ namespace ConsoleApp
 
         public void LoginToSystem()
         {
-            LoggingUI.LoginUserDate();
+            var logging = new LoggingUI();
+            var userDate = logging.CheckUserLoginPassword().ToTuple();
+
+            Manage1.TryLogging(userDate.Item1, userDate.Item2, true);
         }
 
         public void MainLoop()
         {
-            var manage = new Manage();
+            var a = Manage1.GetName();
+            Console.WriteLine(a);
         }
 
     }

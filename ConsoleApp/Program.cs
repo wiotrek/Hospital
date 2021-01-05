@@ -1,4 +1,7 @@
 ﻿using Library;
+using Library.Database;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleApp
 {
@@ -11,6 +14,7 @@ namespace ConsoleApp
             manage.Introduce();
             manage.LoginToSystem();
             manage.MainLoop();
+
         }
     }
 }
