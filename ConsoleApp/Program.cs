@@ -1,9 +1,4 @@
-﻿using Library;
-using Library.Database;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ConsoleApp
+﻿namespace ConsoleApp
 {
     class Program
     {
@@ -11,10 +6,7 @@ namespace ConsoleApp
         {
             var manage = new ManageUI();
 
-            manage.Introduce();
-            manage.LoginToSystem();
             manage.MainLoop();
-
         }
     }
 }

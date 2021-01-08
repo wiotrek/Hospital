@@ -32,9 +32,9 @@ namespace Library
             return isSuccessed != null;
         }
 
-        public string GetName()
+        public string GetPosition()
         {
-            return CurrentUser.Imie.ToString();
+            return CurrentUser.Posada.ToString();
         }
     }
 }
