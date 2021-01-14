@@ -13,7 +13,6 @@ namespace ConsoleApp
         /// <returns>zwraca login i haslo</returns>
         public (string, string) CheckUserLoginPassword()
         {
-            Console.WriteLine("Zaloguj sie \n");
             var isSuccess = false;
             var login = default(string);
             var pass = default(string);

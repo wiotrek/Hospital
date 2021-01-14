@@ -1,28 +1,28 @@
 ﻿using Library;
 using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace ConsoleApp
 {
     public class ManageUI
     {
-        public Manage Manage1 { get; set; } = new Manage();
-        protected List<string> optionsList = new List<string>
-        {
-                $"1 - Pokaz liste {Professions.Doctor.ProffesionsToPolishString()}.",
-                "2 - Pokaz harmonogram.",
-                "0 - Wyjscie z aplikacji."
-        };
+        /// <summary>
+        /// Glowny obiekt do laczenia sie z backendem
+        /// </summary>
+        protected Manage Manage1 { get; set; } = new Manage();
 
         private void Introduce()
         {
             Console.WriteLine("=============================");
             Console.WriteLine("| Witaj w systemie szpitala |");
             Console.WriteLine("=============================");
+            Console.WriteLine("\n");
         }
 
-        private void LoginToSystem()
+        /// <summary>
+        /// funkcja najpierw sprawdza czy dane do logowania sie zgadzaja
+        /// a nastepnie loguje uzytkownika
+        /// </summary>
+        protected void LoginToSystem()
         {
             var logging = new LoggingUI();
             var userDate = logging.CheckUserLoginPassword().ToTuple();
@@ -37,16 +37,23 @@ namespace ConsoleApp
             this.Introduce();
             this.LoginToSystem();
 
+            //Nalezy podac obiekt manage1 do dziedzacej klasy aby utrzymac dostep do juz wypelnionych informacji
+            var menu1 = new MenuUI
+            {
+                Manage1 = this.Manage1
+            };
+
             var exitMainLoop = -1;
-            var extractText = new ExtractTextManageUI();
 
             while (exitMainLoop != 0)
             {
-                exitMainLoop = extractText.ChoiceOperation();
+                exitMainLoop = menu1.ChoiceOperation();
+
 
                 if (exitMainLoop != 0)
                 {
-                    Console.WriteLine("Zakonczyc dana opcje? \n");
+                    Console.WriteLine("\n");
+                    Console.WriteLine("Zakonczyc dana opcje?");
                     Console.WriteLine("Nacisnij dowolny klawisz.");
                     Console.ReadLine();
                 }

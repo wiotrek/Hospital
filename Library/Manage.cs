@@ -1,5 +1,6 @@
 ﻿using Library.Database;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Library
 {
@@ -32,9 +33,25 @@ namespace Library
             return isSuccessed != null;
         }
 
+
+        /// <returns>Zwraca odmieniona nazwe posady konkretnego usera</returns>
         public string GetPosition()
         {
-            return CurrentUser.Posada.ToString();
+            return CurrentUser.Posada.ProffesionsToPolishVariantString();
+        }
+
+        //zwraca liste wspolpracownikow do wyswietlenia
+        public List<string> ShowList4UserProffessions()
+        {
+            var list = new List<string>();
+
+            People
+                .Where(x => x.Posada == CurrentUser.Posada)
+                .ToList()
+                .ForEach(x => list.Add($"{x.Imie} {x.Nazwisko} {x.Posada.ProffesionsToPolishtString()}")
+                );
+
+            return list;
         }
     }
 }

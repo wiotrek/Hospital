@@ -25,18 +25,40 @@ namespace Library.Database
         {
             var osoba = new Person
             {
-                Imie = "Marek",
-                Nazwisko = "Tomaszesski",
-                Pesel = "123456789",
-                Login = "Mareczek123",
-                Haslo = "maro321",
+                Imie = "Krystyna",
+                Nazwisko = "Pola",
+                Pesel = "323456730",
+                Login = "krecha",
+                Haslo = "222",
                 Posada = Professions.Nurse,
                 Specjalizacja = Specializations.Brak
+            };
+            var osoba2 = new Person
+            {
+                Imie = "Lena",
+                Nazwisko = "Kolnierz",
+                Pesel = "423456730",
+                Login = "lenka",
+                Haslo = "111",
+                Posada = Professions.Nurse,
+                Specjalizacja = Specializations.Brak
+            };
+            var osoba3 = new Person
+            {
+                Imie = "Grzegorz",
+                Nazwisko = "Pol",
+                Pesel = "423456730",
+                Login = "pol",
+                Haslo = "123",
+                Posada = Professions.Doctor,
+                Specjalizacja = Specializations.Laryngolog
             };
 
             var list = new List<Person>
             {
-                osoba
+                osoba,
+                osoba2,
+                osoba3
             };
 
             var json = JsonConvert.SerializeObject(list);
