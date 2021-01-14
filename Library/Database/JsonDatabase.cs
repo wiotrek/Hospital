@@ -54,11 +54,23 @@ namespace Library.Database
                 Specjalizacja = Specializations.Laryngolog
             };
 
+            var osoba4 = new Person
+            {
+                Imie = "Marcin",
+                Nazwisko = "Hrum",
+                Pesel = "523456730",
+                Login = "hum",
+                Haslo = "123",
+                Posada = Professions.Administrator,
+                Specjalizacja = Specializations.Brak
+            };
+
             var list = new List<Person>
             {
                 osoba,
                 osoba2,
-                osoba3
+                osoba3,
+                osoba4
             };
 
             var json = JsonConvert.SerializeObject(list);

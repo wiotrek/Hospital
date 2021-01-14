@@ -6,8 +6,16 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            var manage = new ManageUI();
-            manage.MainLoop();
+            if (true)
+            {
+                var manage = new ManageUI();
+                manage.MainLoop();
+            }else
+            {
+                var d = new JsonDatabase();
+                d.AddExampleDate();
+            }
+            
         }
     }
 }

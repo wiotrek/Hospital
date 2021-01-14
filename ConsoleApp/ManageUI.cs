@@ -1,5 +1,6 @@
 ﻿using Library;
 using System;
+using System.Linq;
 
 namespace ConsoleApp
 {
@@ -43,14 +44,38 @@ namespace ConsoleApp
                 Manage1 = this.Manage1
             };
 
-            var exitMainLoop = -1;
+            var choice = -1;
 
-            while (exitMainLoop != 0)
+            while (choice != 0)
             {
-                exitMainLoop = menu1.ChoiceOperation();
+                // otwiera MenuUi z wypisanymi proponowanymi podpowiedziami
+                choice = menu1.ChoiceOperation();
 
+                switch (choice)
+                {
+                    case 1:
+                        this.ShowListEmployess();
+                        break;
+                    case 2:
+                        Console.WriteLine("harmonogram");
+                        break;
+                    case 3:
+                        if (Manage1.IsAdministrator())
+                            Console.WriteLine("trzecia");
+                        else
+                            Console.WriteLine("Blad, sprobuj jeszcze raz");
+                        break;
+                    case 4:
+                        if(Manage1.IsAdministrator())
+                            Console.WriteLine("czwarta");
+                        else
+                            Console.WriteLine("Blad, sprobuj jeszcze raz");
+                        break; 
+                    default:
+                        break;
+                }
 
-                if (exitMainLoop != 0)
+                if (choice != 0)
                 {
                     Console.WriteLine("\n");
                     Console.WriteLine("Zakonczyc dana opcje?");
@@ -59,5 +84,22 @@ namespace ConsoleApp
                 }
             }
         }
+
+        /// <summary>
+        /// z manage pobiera liste w stringu i ja wyswietla
+        /// </summary>
+        private void ShowListEmployess()
+        {
+            Console.Clear();
+            var whichProffessionList = Manage1.GetPosition();
+            Console.WriteLine($"Wyswietlana lista [{whichProffessionList}] \n");
+
+            var list = Manage1.ShowList4UserProffessions();
+            foreach (var x in list.Select((value, index) => new { value, index }))
+            {
+                Console.WriteLine($"{x.index + 1}. {x.value}");
+            }
+        }
+
     }
 }

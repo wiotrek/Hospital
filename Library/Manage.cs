@@ -40,10 +40,22 @@ namespace Library
             return CurrentUser.Posada.ProffesionsToPolishVariantString();
         }
 
+        public bool IsAdministrator()
+        {
+            return CurrentUser.Posada == Professions.Administrator;
+        }
+
         //zwraca liste wspolpracownikow do wyswietlenia
         public List<string> ShowList4UserProffessions()
         {
             var list = new List<string>();
+
+            // jesli uzytkownik jest administratorem to ma podglad na wszystkich uzytkownikow
+            if (CurrentUser.Posada == Professions.Administrator)
+            {
+                People.ForEach(x => list.Add($"{x.Imie} {x.Nazwisko} {x.Posada.ProffesionsToPolishtString()}"));
+                return list;
+            }
 
             People
                 .Where(x => x.Posada == CurrentUser.Posada)
