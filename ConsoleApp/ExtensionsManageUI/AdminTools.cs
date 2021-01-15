@@ -61,6 +61,9 @@ namespace ConsoleApp
 
             Manage1.CreateNewPerson(login, pass, name, surname, pesel, 
                 choicePosition, choiceSpecialization);
+
+            Console.Clear();
+            Console.WriteLine($"Dodano uzytkownika {name} {surname} \n");
         }
 
 
@@ -112,5 +115,38 @@ namespace ConsoleApp
             }
             return choicePostion;
         }
+
+        /// <summary>
+        /// Funkcja usuwa uzytkownika za pomoca deinkremetowanego id,
+        /// ktory sie wyswietla w liscie showlistemployess
+        /// </summary>
+        public void DeleteUser()
+        {
+            var amountUsers = Manage1.ShowList4UserProffessions().Count();
+            var isSuccessDownloadId = false;
+            var id = default(int);
+
+            while (!isSuccessDownloadId)
+            {
+                this.ShowListEmployess();
+                Console.WriteLine("\n");
+                Console.WriteLine("Wybierz numer uzytkownika ktorego uzytkownika chcesz usunac: ");
+
+                isSuccessDownloadId = int.TryParse(Console.ReadLine(), out id);
+                if (isSuccessDownloadId && (id < amountUsers + 1)
+                    && (id > 0))
+                    break;
+
+                isSuccessDownloadId = false;
+                Console.WriteLine("Wybrano niewlasciwa osobe. Czy chcesz sprobowaj jeszcze raz? T/N");
+
+                var again = Console.ReadLine();
+                if (again == "n" || again == "N")
+                    return;
+            }
+
+            Manage1.DeletePerson(id);
+        }
+
     }
 }

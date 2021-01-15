@@ -116,5 +116,22 @@ namespace Library
             db.UpdateDatabase(People);
             this.People = db.GetData();
         }
+
+
+        /// <summary>
+        /// Usuwa osobe z listy po numerze indeksu
+        /// </summary>
+        /// <param name="id">W funkcji deletePerson param id zostanie zinkrementowany</param>
+        public void DeletePerson(int id)
+        {
+            id--;
+            this.People.RemoveAt(id);
+
+            // zaktualizowanie listy w pliku json
+            //pobranie na danych z nowym userem z pliku
+            var db = new JsonDatabase();
+            db.UpdateDatabase(People);
+            this.People = db.GetData();
+        }
     }
 }

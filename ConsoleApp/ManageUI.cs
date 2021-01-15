@@ -74,8 +74,8 @@ namespace ConsoleApp
                             Console.WriteLine("Blad, sprobuj jeszcze raz");
                         break;
                     case 4:
-                        if(Manage1.IsAdministrator())
-                            Console.WriteLine("czwarta");
+                        if (Manage1.IsAdministrator())
+                            adminTools.DeleteUser();
                         else
                             Console.WriteLine("Blad, sprobuj jeszcze raz");
                         break; 
@@ -95,7 +95,7 @@ namespace ConsoleApp
         /// <summary>
         /// z manage pobiera liste w stringu i ja wyswietla
         /// </summary>
-        private void ShowListEmployess()
+        protected void ShowListEmployess()
         {
             Console.Clear();
             var whichProffessionList = Manage1.GetPosition();
