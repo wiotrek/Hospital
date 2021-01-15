@@ -16,6 +16,10 @@ namespace Library
             this.People = db.GetData();
         }
 
+        public string Introduce()
+        {
+            return CurrentUser.ToString();
+        }
 
         /// <summary>
         /// posrednik pomiedzy algorytmem do logowania

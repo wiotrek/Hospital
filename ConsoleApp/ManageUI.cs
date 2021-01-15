@@ -1,6 +1,7 @@
 ﻿using Library;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace ConsoleApp
 {
@@ -22,6 +23,23 @@ namespace ConsoleApp
             Console.Clear();
         }
 
+        public void Greeting()
+        {
+            Console.Clear();
+            Console.WriteLine("\n");
+            Console.WriteLine(Manage1.Introduce());
+
+            var sometext = "";
+            for (int i = 0; i < 5; i++)
+            {
+                sometext += "-------";
+                Console.Write(sometext);
+                Thread.Sleep(500);
+            }
+            Thread.Sleep(3000);
+        }
+
+
         /// <summary>
         /// funkcja najpierw sprawdza czy dane do logowania sie zgadzaja
         /// a nastepnie loguje uzytkownika
@@ -40,6 +58,7 @@ namespace ConsoleApp
         {
             this.Introduce();
             this.LoginToSystem();
+            this.Greeting();
 
             //Nalezy podac obiekt manage1 do dziedzacej klasy aby utrzymac dostep do juz wypelnionych informacji
             var menu1 = new MenuUI
