@@ -58,6 +58,16 @@ namespace Library
                 return list;
             }
 
+            //Tylko lekarza maja specjalizacje
+            if (CurrentUser.Posada == Professions.Doctor)
+            {
+                People
+                    .Where(x => x.Posada == CurrentUser.Posada)
+                    .ToList()
+                    .ForEach(x => list.Add($"{x.Imie} {x.Nazwisko} {x.Posada.ProffesionsToPolishtString()} {x.Specjalizacja}"));
+                return list;
+            }
+
             People
                 .Where(x => x.Posada == CurrentUser.Posada)
                 .ToList()
