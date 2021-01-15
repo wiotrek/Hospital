@@ -40,9 +40,7 @@ namespace ConsoleApp
             var isTrueChoice = int.TryParse(Console.ReadLine(), out int choice);
 
             if (isTrueChoice && (choice < optionsList4Admin.Count))
-            {
                 return choice;
-            }
             else
                 Console.WriteLine("zly klawisz");
 

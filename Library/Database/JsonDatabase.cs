@@ -21,6 +21,12 @@ namespace Library.Database
             return dbJson;
         }
         
+        public void UpdateDatabase(List<Person> people)
+        {
+            var json = JsonConvert.SerializeObject(people);
+            File.WriteAllText(FileName, json);
+        }
+
         public void AddExampleDate()
         {
             var osoba = new Person

@@ -1,4 +1,5 @@
 ﻿using Library.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -64,6 +65,56 @@ namespace Library
                 );
 
             return list;
+        }
+
+
+        /// <returns>Zwraca liste z nazwami stanowisk</returns>
+        public List<string> GetNameProffessions()
+        {
+            var list = new List<string>();
+            foreach (var proffesion in Enum.GetValues(typeof(Professions)))
+            {
+                list.Add(proffesion.ToString());
+            }
+            return list;
+        }
+
+        /// <returns>Zwraca liste z nazwami specjalizacje (wylacznie dla doktorow)</returns>
+        public List<string> GetNameSpecializations()
+        {
+            var list = new List<string>();
+            foreach (var specialization in Enum.GetValues(typeof(Specializations)))
+            {
+                list.Add(specialization.ToString());
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Pobiera argumenty z ktorych tworzy obiekt Person
+        /// </summary>
+        /// <returns>Zwraca obiekt Person gotowny do dodania do serializacji</returns>
+        public void CreateNewPerson(string login, string pass, string name, string surname, string pesel, 
+            int position=0, int specialization=0)
+        {
+            var newPerson = new Person
+            {
+                Login = login,
+                Haslo = pass,
+                Imie = name,
+                Nazwisko = surname,
+                Pesel = pesel,
+                Posada = (Professions)position,
+                Specjalizacja = (Specializations)specialization
+            };
+
+            this.People.Add(newPerson);
+
+            // zaktualizowanie listy w pliku json
+            //pobranie na danych z nowym userem z pliku
+            var db = new JsonDatabase();
+            db.UpdateDatabase(People);
+            this.People = db.GetData();
         }
     }
 }

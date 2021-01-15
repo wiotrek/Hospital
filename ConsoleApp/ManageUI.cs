@@ -17,6 +17,9 @@ namespace ConsoleApp
             Console.WriteLine("| Witaj w systemie szpitala |");
             Console.WriteLine("=============================");
             Console.WriteLine("\n");
+            Console.WriteLine("Nacisnij dowolny klawisz, aby sie zalogowac.");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         /// <summary>
@@ -43,6 +46,10 @@ namespace ConsoleApp
             {
                 Manage1 = this.Manage1
             };
+            var adminTools = new AdminTools
+            {
+                Manage1 = this.Manage1
+            };
 
             var choice = -1;
 
@@ -50,6 +57,7 @@ namespace ConsoleApp
             {
                 // otwiera MenuUi z wypisanymi proponowanymi podpowiedziami
                 choice = menu1.ChoiceOperation();
+                Console.Clear();
 
                 switch (choice)
                 {
@@ -61,7 +69,7 @@ namespace ConsoleApp
                         break;
                     case 3:
                         if (Manage1.IsAdministrator())
-                            Console.WriteLine("trzecia");
+                            adminTools.AddNewUser();
                         else
                             Console.WriteLine("Blad, sprobuj jeszcze raz");
                         break;
@@ -78,8 +86,7 @@ namespace ConsoleApp
                 if (choice != 0)
                 {
                     Console.WriteLine("\n");
-                    Console.WriteLine("Zakonczyc dana opcje?");
-                    Console.WriteLine("Nacisnij dowolny klawisz.");
+                    Console.WriteLine("Nacisnij dowolny klawisz, aby sie zakonczyc.");
                     Console.ReadLine();
                 }
             }
@@ -92,7 +99,7 @@ namespace ConsoleApp
         {
             Console.Clear();
             var whichProffessionList = Manage1.GetPosition();
-            Console.WriteLine($"Wyswietlana lista [{whichProffessionList}] \n");
+            Console.WriteLine($"Wyswietlana lista dla [{whichProffessionList}] \n");
 
             var list = Manage1.ShowList4UserProffessions();
             foreach (var x in list.Select((value, index) => new { value, index }))
