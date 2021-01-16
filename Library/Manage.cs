@@ -7,7 +7,13 @@ namespace Library
 {
     public class Manage
     {
+        /// <summary>
+        /// Glowna lista na ktorej pracuje
+        /// </summary>
         public List<Person> People { get; set; }
+        /// <summary>
+        /// zalogowany uzytkownik
+        /// </summary>
         public Person CurrentUser { get; set; }
 
         public Manage()
@@ -147,5 +153,10 @@ namespace Library
             db.UpdateDatabase(People);
             this.People = db.GetData();
         }
+
+        //public void AddDay(Person doc, Person doc2, Person doc3,)
+        //{
+
+        //}
     }
 }

@@ -39,7 +39,6 @@ namespace ConsoleApp
             Thread.Sleep(3000);
         }
 
-
         /// <summary>
         /// funkcja najpierw sprawdza czy dane do logowania sie zgadzaja
         /// a nastepnie loguje uzytkownika
@@ -61,17 +60,10 @@ namespace ConsoleApp
             this.Greeting();
 
             //Nalezy podac obiekt manage1 do dziedzacej klasy aby utrzymac dostep do juz wypelnionych informacji
-            var menu1 = new MenuUI
-            {
-                Manage1 = this.Manage1
-            };
-            var adminTools = new AdminTools
-            {
-                Manage1 = this.Manage1
-            };
+            var menu1 = new MenuUI { Manage1 = this.Manage1 };
+            var adminTools = new AdminTools { Manage1 = this.Manage1 };
 
             var choice = -1;
-
             while (choice != 0)
             {
                 // otwiera MenuUi z wypisanymi proponowanymi podpowiedziami
