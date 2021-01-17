@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Library.Database;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Library
@@ -15,19 +16,37 @@ namespace Library
         public void AddDayToList(int laryngolog, int kardiolog, int urolog,
             List<int> nurses, int admin)
         {
-            var docLaryngolog = this.GetDoctor(laryngolog, 1);
-            var docKardiolog = this.GetDoctor(kardiolog, 2);
-            var docUrolog = this.GetDoctor(urolog, 3);
+            var laryngologClassPerson = this.GetDoctor(laryngolog, 1);
+            var kardiologClassPerson = this.GetDoctor(kardiolog, 2);
+            var urologClassPerson = this.GetDoctor(urolog, 3);
 
-            var listNurses = this.GetNurse(nurses);
-            //var nurse1 = nurses[0];
-            //var nurse2 = nurses[1];
-            //var nurse3 = nurses[2];
-            //var nurse4 = nurses[3];
-            //var nurse5 = nurses[4];
+            var listNursesClassPerson = this.GetNurse(nurses);
 
+            var nurse1 = listNursesClassPerson[0];
+            var nurse2 = listNursesClassPerson[1];
+            var nurse3 = listNursesClassPerson[2];
+            var nurse4 = listNursesClassPerson[3];
+            var nurse5 = listNursesClassPerson[4];
 
+            var adminClassPerson = this.GetAdmin(admin);
 
+            var day = new Day
+            {
+                Doctor = laryngologClassPerson,
+                Doctor2 = kardiologClassPerson,
+                Doctor3 = urologClassPerson,
+                Nurse1 = nurse1,
+                Nurse2 = nurse2,
+                Nurse3 = nurse3,
+                Nurse4 = nurse4,
+                Nurse5 = nurse5,
+                Admin = adminClassPerson
+            };
+
+            this.ListOfDays.Add(day);
+
+            var db = new JsonDatabaseSchedule();
+            db.UpdateDatabase(ListOfDays);
         }
 
         /// <returns>Pobiera gotowy juz id z listy samych lekarzy ze specjalizacji,
@@ -40,8 +59,14 @@ namespace Library
             return list[id];
         }
 
-
-        public Person GetNurse(List<int> nurses)
+        /// <summary>
+        /// przyjmuje tablice intow z numerami id nurses,
+        /// na ich podstawie w przeskalowanej liscie, dla konktretnie proffession nurse,
+        /// dodaje element Person do nowej listy, i element z tej listy ktorej szukal
+        /// robi to 5 raz
+        /// </summary>
+        /// <returns>Zwraca liste 5 elementow klasy Person</returns>
+        public List<Person> GetNurse(List<int> nurses)
         {
             var list = new List<Person>();
             var listReadyPerson = new List<Person>();
@@ -51,9 +76,23 @@ namespace Library
 
             for (int i = 0; i < 5; i++)
             {
-                
+                // dodaje z listy wyskalowanych elementow czyli elemntow nurse
+                // element o id z tablicy nurse
+                listReadyPerson.Add(list[nurses[i]]);
+                list.RemoveAt(nurses[i]);
             }
             return list;
+        }
+
+        public Person GetAdmin(int id)
+        {
+            var list = new List<Person>();
+
+            list = People
+                .Where(x => x.Posada == Professions.Administrator)
+                .ToList();
+
+            return list[id];
         }
     }
 }

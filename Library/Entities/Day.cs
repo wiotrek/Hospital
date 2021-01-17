@@ -2,7 +2,6 @@
 {
     public class Day
     {
-        public int NumberDay { get; set; }
         public Person Doctor { get; set; }
         public Person Doctor2 { get; set; }
         public Person Doctor3 { get; set; }
