@@ -6,7 +6,7 @@ namespace Library
 {
     public class Schedule : Manage
     {
-        public List<Day> ListOfDays { get; private set; }
+        public List<Day> ListOfDays { get; private set; } = new List<Day>();
 
         /// <summary>
         /// pobiera adresy id uzytkownikow, z konkretnych list ( to nie jest jedna lista wszystkich,
