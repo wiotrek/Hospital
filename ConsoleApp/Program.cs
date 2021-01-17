@@ -11,9 +11,9 @@ namespace ConsoleApp
             var manage = new ManageUI();
             manage.MainLoop();
 
-            //var db = new JsonDatabase();
-
-            //db.AddRandomDate();
+            //jesli chcemy dodac nowe dane mozemy skorzystac z tej funkcji
+            //var e = new ExampleDate();
+            //e.AddRandomDate();
         }
     }
 }

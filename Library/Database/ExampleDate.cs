@@ -16,11 +16,12 @@ namespace Library.Database
 
             for (int i = 0; i < 12; i++)
             {
+                var randName = this.choiceName();
                 var doctor = new Person
                 {
-                    Imie = this.choiceName(),
+                    Imie = randName,
                     Nazwisko = this.choiceSurName(),
-                    Login = this.createLogin(this.choiceName()),
+                    Login = this.createLogin(randName),
                     Haslo = this.createPass(),
                     Pesel = this.createPesel(),
                     Posada = Professions.Doctor,
@@ -31,11 +32,12 @@ namespace Library.Database
 
             for (int i = 0; i < 20; i++)
             {
+                var randName = this.choiceName();
                 var nurse = new Person
                 {
-                    Imie = this.choiceName(),
+                    Imie = randName,
                     Nazwisko = this.choiceSurName(),
-                    Login = this.createLogin(this.choiceName()),
+                    Login = this.createLogin(randName),
                     Haslo = this.createPass(),
                     Pesel = this.createPesel(),
                     Posada = Professions.Nurse,
@@ -46,11 +48,12 @@ namespace Library.Database
 
             for (int i = 0; i < 4; i++)
             {
+                var randName = this.choiceName();
                 var admin = new Person
                 {
-                    Imie = this.choiceName(),
+                    Imie = randName,
                     Nazwisko = this.choiceSurName(),
-                    Login = this.createLogin(this.choiceName()),
+                    Login = this.createLogin(randName),
                     Haslo = this.createPass(),
                     Pesel = this.createPesel(),
                     Posada = Professions.Administrator,
