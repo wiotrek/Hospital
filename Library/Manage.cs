@@ -56,6 +56,11 @@ namespace Library
             return CurrentUser.Posada == Professions.Administrator;
         }
 
+        public bool IsDoctor()
+        {
+            return CurrentUser.Posada == Professions.Doctor;
+        }
+
         //zwraca liste wspolpracownikow do wyswietlenia
         public List<string> ShowList4UserProffessions()
         {
@@ -87,6 +92,43 @@ namespace Library
             return list;
         }
 
+        /// <returns>zwraca liste doktorow do wstawienia ich w harmonogram</returns>
+        public List<string> ListToAddToScheduleDoctor(int specialization)
+        {
+            var list = new List<string>();
+            var specializationToEnum = (Specializations)specialization;
+
+            People
+                .Where(x => x.Specjalizacja == specializationToEnum)
+                .ToList()
+                .ForEach(x => list.Add($"{x.Imie} {x.Nazwisko} {x.Posada.ProffesionsToPolishtString()} {x.Specjalizacja}"));
+            return list;
+        }
+
+        /// <returns>zwraca liste pielegniarek do wstawienia ich w harmonogram</returns>
+        public List<string> ListToAddToScheduleNurse()
+        {
+            var list = new List<string>();
+
+            People
+                .Where(x => x.Posada == Professions.Nurse)
+                .ToList()
+                .ForEach(x => list.Add($"{x.Imie} {x.Nazwisko} {x.Posada.ProffesionsToPolishtString()}")
+                );
+            return list;
+        }
+
+        /// <returns>zwraca liste adminow do wstawienia ich w harmonogram</returns>
+        public List<string> ListToAddToScheduleAdmin()
+        {
+            var list = new List<string>();
+
+            People
+                .Where(x => x.Posada == Professions.Administrator)
+                .ToList()
+                .ForEach(x => list.Add($"{x.Imie} {x.Nazwisko} {x.Posada.ProffesionsToPolishtString()}"));
+            return list;
+        }
 
         /// <returns>Zwraca liste z nazwami stanowisk</returns>
         public List<string> GetNameProffessions()
@@ -154,9 +196,33 @@ namespace Library
             this.People = db.GetData();
         }
 
-        //public void AddDay(Person doc, Person doc2, Person doc3,)
-        //{
+        /// <summary>
+        /// Zarzadza klasa do harmonogramu
+        /// </summary>
+        public void ScheduleManage (int laryngolog, int kardiolog, int urolog,
+            List<int> nurses, int admin)
+        {
+            var schedule = new Schedule
+            {
+                People = this.People
+            };
 
-        //}
+            schedule.AddDayToList(laryngolog, kardiolog, urolog,
+            nurses, admin);
+
+            //id--;
+            //var employer = default(Person);
+
+            //People
+            //    .Where(x => x.Posada == CurrentUser.Posada)
+            //    .ToList()
+            //    .ForEach(x => list.Add(x));
+
+            //var PersonToPick = list[id];
+
+            //employer = People[id];
+
+            //return PersonToPick.ToString();
+        }
     }
 }

@@ -62,6 +62,7 @@ namespace ConsoleApp
             //Nalezy podac obiekt manage1 do dziedzacej klasy aby utrzymac dostep do juz wypelnionych informacji
             var menu1 = new MenuUI { Manage1 = this.Manage1 };
             var adminTools = new AdminTools { Manage1 = this.Manage1 };
+            var schedule1 = new ScheduleUI { Manage1 = this.Manage1 };
 
             var choice = -1;
             while (choice != 0)
@@ -76,7 +77,7 @@ namespace ConsoleApp
                         this.ShowListEmployess();
                         break;
                     case 2:
-                        Console.WriteLine("harmonogram");
+                        schedule1.MainSchedule();
                         break;
                     case 3:
                         if (Manage1.IsAdministrator())

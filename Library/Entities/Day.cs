@@ -11,7 +11,6 @@
         public Person Nurse3 { get; set; }
         public Person Nurse4 { get; set; }
         public Person Nurse5 { get; set; }
-        public Person Nurse6 { get; set; }
         public Person Admin { get; set; }
     }
 }
