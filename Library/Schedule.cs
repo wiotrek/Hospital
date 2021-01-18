@@ -8,6 +8,12 @@ namespace Library
     {
         public List<Day> ListOfDays { get; private set; } = new List<Day>();
 
+        public Schedule()
+        {
+            var db = new JsonDatabaseSchedule();
+            ListOfDays = db.GetData();
+        }
+
         /// <summary>
         /// pobiera adresy id uzytkownikow, z konkretnych list ( to nie jest jedna lista wszystkich,
         /// sa one rozdzielone w rozny sposob)

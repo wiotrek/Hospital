@@ -197,32 +197,42 @@ namespace Library
         }
 
         /// <summary>
-        /// Zarzadza klasa do harmonogramu
+        /// Funkcja tworzaca odniesienie do klasy schedule aby stworzyc dzien
         /// </summary>
         public void ScheduleManage (int laryngolog, int kardiolog, int urolog,
             List<int> nurses, int admin)
         {
-            var schedule = new Schedule
-            {
-                People = this.People
-            };
+            var schedule = new Schedule { People = this.People };
 
             schedule.AddDayToList(laryngolog, kardiolog, urolog,
             nurses, admin);
-
-            //id--;
-            //var employer = default(Person);
-
-            //People
-            //    .Where(x => x.Posada == CurrentUser.Posada)
-            //    .ToList()
-            //    .ForEach(x => list.Add(x));
-
-            //var PersonToPick = list[id];
-
-            //employer = People[id];
-
-            //return PersonToPick.ToString();
         }
+
+        public List<string> GetScheduleAllDays()
+        {
+            var schedule1 = new Schedule();
+            var listOfDays = schedule1.ListOfDays;
+
+            var list = new List<string>();
+
+            foreach (var day in listOfDays)
+            {
+                list.Add("Day");
+                list.Add(day.Doctor.ToString());
+                list.Add(day.Doctor2.ToString());
+                list.Add(day.Doctor3.ToString());
+                list.Add(day.Nurse1.ToString());
+                list.Add(day.Nurse2.ToString());
+                list.Add(day.Nurse3.ToString());
+                list.Add(day.Nurse4.ToString());
+                list.Add(day.Nurse5.ToString());
+                list.Add(day.Admin.ToString());
+                list.Add("\n");
+            };
+
+            return list;
+        }
+
+
     }
 }

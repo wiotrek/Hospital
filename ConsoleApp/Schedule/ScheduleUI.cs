@@ -20,6 +20,9 @@ namespace ConsoleApp
             {
                 Console.Clear();
                 this.optionsList.ForEach(x => Console.WriteLine(x));
+
+                Console.WriteLine("\n");
+
                 if (Manage1.IsDoctor())
                     Console.WriteLine("3 - Dodaj personel");
                 var isSuccessParse = int.TryParse(Console.ReadLine(), out int choice);
@@ -30,10 +33,10 @@ namespace ConsoleApp
                         launch = false;
                         break;
                     case 1:
-                        Console.WriteLine("1");
+                        this.CheckMonth();
                         break;
                     case 2:
-                        Console.WriteLine("2");
+                        this.Day();
                         break;
                     case 3:
                         this.AddPersonnel();
@@ -154,12 +157,29 @@ namespace ConsoleApp
 
         public void CheckMonth()
         {
-            throw new System.NotImplementedException();
+            Console.Clear();
+
+            var list = Manage1.GetScheduleAllDays();
+            list.ForEach(x => Console.WriteLine(x));
+
+            Console.WriteLine("Nacisnij dowolny przycisk, aby zakonczyc");
+            Console.ReadLine();
         }
 
         public void Day()
         {
-            throw new System.NotImplementedException();
+            Console.Clear();
+
+            var list = Manage1.GetScheduleAllDays();
+            Console.WriteLine("Najblizszy dzien: ");
+            Console.WriteLine("\n");
+
+            for (int i = 0; i < 11; i++)
+                Console.WriteLine(list[i]);
+
+
+            Console.WriteLine("Nacisnij dowolny przycisk, aby zakonczyc");
+            Console.ReadLine();
         }
     }
 }
